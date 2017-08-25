@@ -4,7 +4,6 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    article_params = params.require(:article).permit(:title, :text)
     @article = Article.create(article_params)
 
     if @article.new_record?
@@ -16,6 +15,7 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    @comment = Comment.new(article_id: @article.id)
   end
 
   def index
@@ -27,8 +27,6 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    article_params = params.require(:article).permit(:title, :text)
-
     @article = Article.find(params[:id])
 
     if @article.update(article_params)
@@ -43,5 +41,11 @@ class ArticlesController < ApplicationController
     article.destroy
 
     redirect_to articles_path
+  end
+
+  private
+
+  def article_params
+    params.require(:article).permit(:title, :text)
   end
 end
