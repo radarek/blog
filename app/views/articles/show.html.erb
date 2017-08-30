@@ -8,6 +8,10 @@
   <%= @article.text %>
 </p>
 
+<% if @next_article %>
+  <%= link_to "Next article", article_path(@next_article) %>
+<% end %>
+
 <h2>Comments</h2>
 <%= render @article.comments.order(created_at: :desc) %>
 
