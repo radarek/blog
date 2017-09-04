@@ -9,6 +9,23 @@
   </head>
 
   <body>
+    <% if current_admin %>
+      <p>
+        Hello <%= current_admin.login %> |
+        <%= link_to "Sign out", "/logout", method: :delete %>
+      </p>
+    <% else %>
+      <%= link_to "Sign in", "/login" %>
+    <% end %>
+
+    <p style="color: green">
+      <%= notice %>
+    </p>
+
+    <p style="color: red">
+      <%= alert %>
+    </p>
+
     <%= yield %>
   </body>
 </html>
