@@ -17,7 +17,7 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
-    @comment = Comment.new(article_id: @article.id)
+    @comment = Comment.new(article_id: @article.id, commenter: cookies[:commenter])
     @next_article = @article.next_article
   end
 
