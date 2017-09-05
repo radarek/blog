@@ -3,13 +3,4 @@
 
 <h1>Articles</h1>
 
-<% @articles.each do |article| %>
-  <div>
-    <p>
-      <strong>Tytuł: </strong>
-      <%= article.title %>
-
-      <%= link_to "show article", article_path(article) %>
-    </p>
-  </div>
-<% end %>
+<%= render @articles %>
