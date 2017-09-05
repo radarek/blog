@@ -1,6 +1,11 @@
 <%= link_to "Homepage", root_path %> |
 <%= link_to "New article", new_article_path %>
 
+<%= form_tag "/search", method: "get" do %>
+  <%= text_field_tag :q, params[:q], placeholder: "Search..." %>
+  <%= submit_tag "Search" %>
+<% end %>
+
 <h1>Articles</h1>
 
 <%= render @articles %>

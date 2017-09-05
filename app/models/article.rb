@@ -16,4 +16,8 @@ class Article < ApplicationRecord
     self.title = title.capitalize
     save!
   end
+
+  def self.search(q)
+    Article.where("title like :query or text like :query", query: "%#{q}%")
+  end
 end
