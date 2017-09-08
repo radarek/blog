@@ -11,5 +11,26 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require turbolinks
 //= require_tree .
+
+window.addEventListener("load", function() {
+  let previewLinks = document.querySelectorAll("a.preview");
+
+  for (let i = 0; i < previewLinks.length; i++) {
+    previewLinks[i].addEventListener("click", function(e) {
+      e.preventDefault();
+      var link = this;
+      var request = new XMLHttpRequest();
+      request.open("GET", this.href);
+      request.responseType = "json";
+      request.addEventListener("load", function() {
+        var text = this.response.text;
+        var p = document.getElementById("preview-" + link.dataset.id);
+        var textNode = document.createTextNode(text);
+        p.innerHTML = text;
+        p.style = "display: block;";
+      });
+      request.send();
+    });
+  }
+});

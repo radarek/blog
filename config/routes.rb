@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   resources :articles do
     resources :comments
+
+    member do
+      get "preview"
+    end
   end
 
   get "/login", to: "sessions#new"
