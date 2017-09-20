@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   root "welcome#index" #tutaj zmieniamy stronę główną
 
+  match "/comments/:id/vote", to: "comments#vote", as: "vote_comment", via: [:get, :post]
+
   resources :articles do
     resources :comments
 

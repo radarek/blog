@@ -17,7 +17,7 @@ class Article < ApplicationRecord
     save!
   end
 
-  def self.search(q)
+  def self.search(q, status, from_date, to_date, order)
     Article.where("title like :query or text like :query", query: "%#{q}%")
   end
 end

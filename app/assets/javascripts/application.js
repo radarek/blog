@@ -34,3 +34,33 @@ window.addEventListener("load", function() {
     });
   }
 });
+
+window.addEventListener("load", function() {
+  let links = document.querySelectorAll(".vote");
+
+  for (let i = 0; i < links.length; i++) {
+    let link = links[i];
+
+    link.addEventListener("click", function(e) {
+      e.preventDefault();
+      vote(link.dataset.url, link.dataset.dir);
+    });
+  }
+});
+
+function vote(url, dir) {
+  let request = new XMLHttpRequest();
+  let params = "dir=" + dir;
+  request.open("POST", url);
+  request.responseType = "json";
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  request.addEventListener("load", function() {
+    updateRank(this.response.id, this.response.rank);
+  });
+  request.send(params);
+}
+
+function updateRank(commentId, rank) {
+  let spanRank = document.getElementById("rank-" + commentId);
+  spanRank.innerHTML = rank;
+}

@@ -8,6 +8,13 @@
   <%= comment.body %>
 </p>
 
+<p>
+  <strong>Rank:</strong>
+  <%= link_to "-", vote_comment_path(comment, dir: "down"), class: "vote", data: { url: vote_comment_path(comment, format: "json"), dir: "down" } %>
+  <span id="rank-<%= comment.id %>"><%= comment.rank %></span>
+  <%= link_to "+", vote_comment_path(comment, dir: "up"), class: "vote", data: { url: vote_comment_path(comment, format: "json"), dir: "up" } %>
+</p>
+
 <%= link_to "Delete", article_comment_path(@article, comment),
                       method: :delete,
                       data: { confirm: "Are you sure?" } %>
