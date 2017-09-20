@@ -1,5 +1,6 @@
 class Article < ApplicationRecord
-  validates :title, length: { minimum: 5 }
+  # validates :title, length: { minimum: 5 }
+  validate :check_title_length
 
   has_many :comments, dependent: :destroy
   has_many :commenters_ips, through: :comments, source: "ip"
@@ -19,5 +20,13 @@ class Article < ApplicationRecord
 
   def self.search(q, status, from_date, to_date, order)
     Article.where("title like :query or text like :query", query: "%#{q}%")
+  end
+
+  private
+
+  def check_title_length
+    if title && title.length < 5
+      errors.add(:title, "is too short (minimum is 5 characters)")
+    end
   end
 end
