@@ -1,5 +1,5 @@
 class Article < ApplicationRecord
-  validates :title, presence: true, length: { minimum: 5 }
+  validates :title, length: { minimum: 5 }
 
   has_many :comments, dependent: :destroy
   has_many :commenters_ips, through: :comments, source: "ip"
