@@ -40,6 +40,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'fabrication'
 end
 
 group :development do

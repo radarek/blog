@@ -1,6 +1,9 @@
 class Article < ApplicationRecord
   # validates :title, length: { minimum: 5 }
   validate :check_title_length
+  validates :text, presence: true
+  validates :title, uniqueness: true
+  validates :text, length: { minimum: 10 }, if: ->(article) { article.title && article.title.ends_with?("!") }
 
   has_many :comments, dependent: :destroy
   has_many :commenters_ips, through: :comments, source: "ip"
