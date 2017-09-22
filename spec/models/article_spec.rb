@@ -16,4 +16,24 @@ RSpec.describe Article do
 
     it { is_expected.to be_valid }
   end
+
+  describe "#next_article" do
+    context "when article is the last one" do
+      let!(:article) { Fabricate(:article) }
+
+      it "returns nil" do
+        expect(article.next_article).to eq nil
+      end
+    end
+
+    context "when article is NOT the last one" do
+      let!(:article1) { Fabricate(:article) }
+      let!(:article2) { Fabricate(:article) }
+      let!(:article3) { Fabricate(:article) }
+
+      it "returns second article" do
+        expect(article1.next_article).to eq article2
+      end
+    end
+  end
 end
